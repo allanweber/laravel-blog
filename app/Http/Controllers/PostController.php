@@ -12,7 +12,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::latest()->with('user:id,name')->paginate(10);
+        return view('posts.index', [
+            'posts' => $posts,
+        ]);
     }
 
     /**
@@ -36,7 +39,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', [
+            'post' => $post,
+            'comments' => $post->comments()->latest()->with('user')->paginate(10),
+        ]);
     }
 
     /**

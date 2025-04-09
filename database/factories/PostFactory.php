@@ -19,7 +19,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
-            'body' => fake()->paragraph(),
+            'body' => file_get_contents(database_path('factories/fixtures/example.md')),
             'user_id' => User::factory(),
         ];
     }
